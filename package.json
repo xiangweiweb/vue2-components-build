@@ -1,0 +1,30 @@
+{
+  "name": "vue2-components-build",
+  "version": "1.0.0",
+  "description": "vue2 UI组件库构建demo",
+  "main": "./cjs/index.js",
+  "module": "./es/index.js",
+  "files": [
+    "components",
+    "build",
+    "es",
+    "cjs",
+    "babel.config.js"
+  ],
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xiangweiweb/vue2-components-build.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xiangweiweb/vue2-components-build/issues"
+  },
+  "homepage": "https://github.com/xiangweiweb/vue2-components-build#readme"
+}
