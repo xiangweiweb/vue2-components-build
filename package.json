@@ -15,7 +15,7 @@
     "example": "example"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "cd example-dev && npm run serve"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,12 @@
   "bugs": {
     "url": "https://github.com/xiangweiweb/vue2-components-build/issues"
   },
-  "homepage": "https://github.com/xiangweiweb/vue2-components-build#readme"
+  "homepage": "https://github.com/xiangweiweb/vue2-components-build#readme",
+  "dependencies": {
+    "element-ui": "^2.15.9"
+  },
+  "devDependencies": {
+    "less": "^4.1.3",
+    "less-loader": "^7.3.0"
+  }
 }
