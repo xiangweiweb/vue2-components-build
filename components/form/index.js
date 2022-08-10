@@ -1,7 +1,7 @@
-import UIForm from './index.vue';
+import Form from './index.vue';
 
-UIForm.install = function(Vue) {
-    Vue.component(UIForm.name, UIForm);
+Form.install = function(Vue) {
+    Vue.component(Form.name, Form);
 }
 
-export default UIForm;
+export default Form;

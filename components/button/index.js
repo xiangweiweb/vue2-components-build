@@ -1,7 +1,7 @@
-import UIButton from './index.vue';
+import Button from './index.vue';
 
-UIButton.install = function(Vue) {
-    Vue.component(UIButton.name, UIButton);
+Button.install = function(Vue) {
+    Vue.component(Button.name, Button);
 }
 
-export default UIButton;
+export default Button;

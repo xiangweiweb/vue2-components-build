@@ -11,14 +11,14 @@
 </template>
 
 <script>
-import UIButton from 'vue2-components-build/components/button';
+import Button from 'vue2-components-build/components/button';
 import { addCount } from 'vue2-components-build/src/utils/util.js';
 
 export default {
     name: 'ui-form',
 
     components: {
-        [UIButton.name]: UIButton,
+        [Button.name]: Button,
     },
 
     data() {
