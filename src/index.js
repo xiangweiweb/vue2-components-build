@@ -14,6 +14,7 @@ export default {
     Button,
     Form,
 }
-// 安装所有的一个index， 所有的style怎么处理，看element-ui
-// future-ui为什么要打包两个format  main module的含义
-// 需要打包的amd格式 引入所有
+// js打包
+// css
+// 多语言
+
