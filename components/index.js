@@ -18,3 +18,9 @@ export default {
     install
 };
 
+// unpkg引入时，会先引入vue并挂载到window对象上
+if(typeof window !== 'undefined' && typeof window.Vue !== 'undefined') {
+    console.log('vue2-components-build window.Vue存在');
+    install(window.Vue);
+}
+

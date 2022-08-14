@@ -128,10 +128,15 @@ function getUMDConfig() {
             name: 'vue2-components-build',
             file: 'dist/vue2-components-build.min.js',
             format: 'umd',
+            sourcemap: true,
             exports: 'auto',
         },
+        // 指名global.vue是外部依赖
+        globals: {
+            vue: 'vue',
+        },
         // terser压缩代码
-        plugins: commonPlugins.concat(terser()),
+        plugins: commonPlugins,
     }
 }
 
