@@ -31,7 +31,7 @@ function buildStyle() {
         .pipe(dest(resolve('lib')));
 
     // 公共样式
-    const commonCss = src('../src/styles/*.less')
+    const commonCss = src('../components/styles/*.less')
         .pipe(less())
         .pipe(postcss([
             autoprefixer()

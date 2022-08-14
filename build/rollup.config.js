@@ -50,43 +50,6 @@ function createESConfig(entry, outputFilePath, externals) {
     }
 }
 
-function createConfig(format, externals, entry, outputFilePath) {
-    return {
-        input: entry,
-        output: {
-            name: format === 'umd' ? 'vue2-components-build' : undefined,
-            file: outputFilePath,
-            format: format,
-            exports: 'auto',
-            paths: (id) => {
-                // 文件引用修改：源文件路径 -> 打包后的路径
-                const newId = id.replace(/^vue2-components-build\/(components|src)\/(.*)/, function(_raw, _dirName, filePath) {
-                    return 'vue2-components-build/lib/' + filePath;
-                });
-                return newId;
-            }
-        },
-        external: externals,
-        plugins: [
-            resolve({
-                extensions: ['.js', '.vue', '.json']
-            }),
-            vue(),
-            commonjs(),
-            alias({
-                entries: [
-                    { find: 'vue2-components-build/components', replacement: path.resolve(__dirname, '../components') },
-                    { find: 'vue2-components-build/src', replacement: path.resolve(__dirname, '../src') },
-                ]
-            }),
-            getBabelInputPlugin({
-                babelHelpers: 'runtime',
-                ...babelConfig,
-            }),
-        ]
-    };
-}
-
 
 /**
  * 组件打包
@@ -97,9 +60,7 @@ function collectComponents(collection) {
     const dirs = fs.readdirSync(componentsDir);
     dirs.forEach((componentName) => {
         // 其他地方会处理
-        if(/.(js|less)/.test(componentName)) {
-            return;
-        }
+        if(/.(js|less)$/.test(componentName) || componentName === 'styles') return;
         collection.push({
             entry: path.join(componentsDir, componentName, 'index.js'),
             // 直接放到lib目录下
@@ -116,10 +77,6 @@ function collectSrc(collection) {
     const srcDir = resolvePath('src');
     const dirs = fs.readdirSync(srcDir);
     dirs.forEach((categoryName) => {
-        // 样式打包时会处理
-        if(categoryName === 'styles') {
-            return;
-        }
         // 比如 src/utils
         const categoryDir = path.join(srcDir, categoryName);
         const fileNames = fs.readdirSync(categoryDir);

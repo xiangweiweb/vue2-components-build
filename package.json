@@ -2,7 +2,7 @@
   "name": "vue2-components-build",
   "version": "1.0.0",
   "description": "vue2 UI组件库构建demo",
-  "main": "./dist/vue2-components-build.prod.min.js",
+  "main": "./dist/vue2-components-build.min.js",
   "module": "./lib/index.js",
   "files": [
     "lib",
