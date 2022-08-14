@@ -96,6 +96,10 @@ function collectComponents(collection) {
     const componentsDir = resolvePath('components');
     const dirs = fs.readdirSync(componentsDir);
     dirs.forEach((componentName) => {
+        // 其他地方会处理
+        if(/.(js|less)/.test(componentName)) {
+            return;
+        }
         collection.push({
             entry: path.join(componentsDir, componentName, 'index.js'),
             // 直接放到lib目录下
@@ -112,8 +116,8 @@ function collectSrc(collection) {
     const srcDir = resolvePath('src');
     const dirs = fs.readdirSync(srcDir);
     dirs.forEach((categoryName) => {
-        // 其他地方会处理
-        if(categoryName === 'index.js' || categoryName === 'styles') {
+        // 样式打包时会处理
+        if(categoryName === 'styles') {
             return;
         }
         // 比如 src/utils
@@ -148,7 +152,7 @@ function getESConfigs() {
         return createESConfig(entry, outputFile, externals);
     });
     // 所有组件
-    const entry = resolvePath('src') + '/index.js';
+    const entry = resolvePath('components') + '/index.js';
     const indexExternals = () => true;
     result.push(createESConfig(entry, 'index.js', indexExternals));
 
@@ -160,12 +164,12 @@ function getESConfigs() {
  * @returns
  */
 function getUMDConfig() {
-    const entry = resolvePath('src') + '/index.js';
+    const entry = resolvePath('components') + '/index.js';
     return {
         input: entry,
         output: {
             name: 'vue2-components-build',
-            file: 'dist/vue2-components-build.prod.min.js',
+            file: 'dist/vue2-components-build.min.js',
             format: 'umd',
             exports: 'auto',
         },
@@ -174,20 +178,6 @@ function getUMDConfig() {
     }
 }
 
-/**
- * index.js打包
- * 1、es，导出所有组件的引入
-
- * @returns
- */
-function getIndexConfigs() {
-    const entry = resolvePath('src') + '/index.js';
-    const externals = () => true;
-    const es = createConfig('es', externals, entry, 'lib/index.js');
-    const umd = createConfig('umd', [], entry, 'dist/index.umd.cjs');
-    umd.plugins.push(terser());
-    return [ es, umd ];
-}
 
 const esConfigs = getESConfigs();
 const umdConfig = getUMDConfig();

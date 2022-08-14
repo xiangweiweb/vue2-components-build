@@ -1,0 +1,7 @@
+.ui-form-container {
+  border: 1px solid red;
+  padding: 10px;
+}
+.ui-form-container .ui-form-content {
+  margin-bottom: 10px;
+}

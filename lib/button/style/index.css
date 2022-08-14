@@ -1,0 +1,8 @@
+.ui-button {
+  border: none;
+  background: blue;
+  color: white;
+  line-height: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+}

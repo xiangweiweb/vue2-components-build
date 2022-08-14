@@ -1,0 +1,18 @@
+body {
+  font-size: 14px;
+}
+.ui-button {
+  border: none;
+  background: blue;
+  color: white;
+  line-height: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.ui-form-container {
+  border: 1px solid red;
+  padding: 10px;
+}
+.ui-form-container .ui-form-content {
+  margin-bottom: 10px;
+}
