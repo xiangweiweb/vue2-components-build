@@ -5,16 +5,16 @@ const components = [Button, Form];
 
 const install = (Vue) => {
     components.forEach((component) => {
-        Vue.component(component.name, component);
+        Vue.use(component.name);
     });
 }
 
-export default {
-    install,
+export {
     Button,
     Form,
 }
-// js打包
-// css
-// 多语言
+
+export default {
+    install
+};
 
