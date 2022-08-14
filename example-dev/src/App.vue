@@ -6,17 +6,8 @@
 </template>
 
 <script>
-import UIForm from 'vue2-components-build/components/form';
-import UIButton from 'vue2-components-build/components/button';
-import 'vue2-components-build/components/form/style/index.less';
-import 'vue2-components-build/components/button/style/index.less';
-
 export default {
     name: 'App',
-    components: {
-        [UIForm.name]: UIForm,
-        [UIButton.name]: UIButton,
-    },
     methods: {
         onClick() {
             alert('click hello');
