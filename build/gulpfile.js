@@ -27,8 +27,10 @@ function resolve(dir) {
 
 function buildStyle() {
     // 保留less源文件
-    const styleLess = src(['../src/styles/*.less', '../components/**/style/*.less', '../components/index.less'])
-        .pipe(dest(resolve('lib')));
+    const styleLess = src('../components/styles/*.less')
+            .pipe(dest(resolve('lib/styles')))
+            .pipe(src(['../components/**/style/*.less', '../components/index.less']))
+            .pipe(dest(resolve('lib')));
 
     // 公共样式
     const commonCss = src('../components/styles/*.less')
