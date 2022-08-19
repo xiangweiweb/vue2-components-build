@@ -5,7 +5,7 @@ const components = [Button, Form];
 
 const install = (Vue) => {
     components.forEach((component) => {
-        Vue.use(component.name);
+        Vue.use(component);
     });
 }
 

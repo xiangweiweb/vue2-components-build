@@ -5,7 +5,6 @@ const resolve = require('rollup-plugin-node-resolve');
 const commonjs = require('rollup-plugin-commonjs');
 const alias = require('@rollup/plugin-alias');
 const vue = require('rollup-plugin-vue');
-const { terser } = require('rollup-plugin-terser');
 const babelConfig = require('../babel.config.js');
 
 function resolvePath(dir) {
@@ -118,6 +117,8 @@ function getESConfigs() {
 
 /**
  * umd，导出所有的组件 unpkg，可直接用script引用
+ * 打包出的有循环依赖，https://juejin.cn/post/6862635764981235719
+ * 但此时(2022-08-18)并没有发现有beta的版本，最新版22.0.2问题依然存在
  * @returns
  */
 function getUMDConfig() {
@@ -129,14 +130,34 @@ function getUMDConfig() {
             file: 'dist/vue2-components-build.min.js',
             format: 'umd',
             sourcemap: true,
-            exports: 'auto',
+            exports: 'named',
+            // 指名global.vue是外部依赖
+            globals: {
+                vue: 'Vue',
+            },
         },
-        // 指名global.vue是外部依赖
-        globals: {
-            vue: 'vue',
-        },
+        external: ['vue'],
         // terser压缩代码
-        plugins: commonPlugins,
+        plugins:  commonPlugins.concat([
+            getBabelInputPlugin({
+                babelHelpers: 'bundled',
+                babelrc: false,
+                exclude: /node_modules/,
+                "presets": [
+                    [
+                        "@babel/preset-env",
+                    ]
+                ],
+                plugins: [
+                    [
+                        '@babel/plugin-transform-runtime',
+                        {
+                            helpers: false,
+                        }
+                    ],
+                ],
+            }),
+        ]),
     }
 }
 
