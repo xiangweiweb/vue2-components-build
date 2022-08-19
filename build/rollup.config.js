@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 const { getBabelInputPlugin } = require('@rollup/plugin-babel');
-const resolve = require('rollup-plugin-node-resolve');
-const commonjs = require('rollup-plugin-commonjs');
+const {nodeResolve: resolve} = require('@rollup/plugin-node-resolve');
+const commonjs = require('@rollup/plugin-commonjs');
 const alias = require('@rollup/plugin-alias');
 const vue = require('rollup-plugin-vue');
 const babelConfig = require('../babel.config.js');
@@ -109,7 +109,9 @@ function getESConfigs() {
     });
     // 所有组件
     const entry = resolvePath('components') + '/index.js';
-    const indexExternals = () => true;
+    const indexExternals = (id) => {
+        return id !== entry;
+    };
     result.push(createESConfig(entry, 'index.js', indexExternals));
 
     return result;
